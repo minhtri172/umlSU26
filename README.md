@@ -6,6 +6,7 @@ or download this repo to get the starters referenced in the weekly notes and exe
 | Folder | Topic |
 |--------|-------|
 | `week8/` | Why event-driven systems — Kafka "first message" lab + a private registry lab; Exercise 8 starters in `week8/ex8/` |
+| `week9/` | Message brokers — capstone step 1: the pipeline publishes an `ImagePushed` event to Kafka |
 
 More weeks are added as the term progresses.
 

@@ -1,0 +1,33 @@
+// Week 9 capstone (step 1) — the pipeline announces its build to Kafka.
+// This is JUST the send: after a successful build, publish one ImagePushed
+// event to the ci.images topic. Consuming/reacting to it comes in later weeks.
+//
+// How the send works: the agent already has the Docker socket mounted (as in
+// earlier weeks), so the `sh` step pipes a message into the Kafka container's
+// own console-producer via `docker exec`. No Kafka client to install in the
+// agent, and no shared-network setup needed yet.
+pipeline {
+    agent any
+    environment {
+        KAFKA = 'week9-kafka'   // name of the running Kafka container
+        TOPIC = 'ci.images'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'build + push the image here, as in earlier weeks'
+            }
+        }
+        stage('Announce to Kafka') {
+            steps {
+                sh '''
+                    MSG="{\\"event\\":\\"ImagePushed\\",\\"image\\":\\"calculator\\",\\"tag\\":\\"${BUILD_NUMBER}\\",\\"branch\\":\\"${BRANCH_NAME}\\"}"
+                    echo "$MSG" | docker exec -i ${KAFKA} \\
+                        /opt/kafka/bin/kafka-console-producer.sh \\
+                        --topic ${TOPIC} --bootstrap-server localhost:9092
+                    echo "announced to Kafka: $MSG"
+                '''
+            }
+        }
+    }
+}
