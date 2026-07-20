@@ -39,6 +39,12 @@ NAME=c1 python consumer_group.py
 NAME=c2 python consumer_group.py
 ```
 
+**Shortcut:** `./run_group.sh` starts both consumers at once (labeled `[c1]`/`[c2]`
+in one terminal; Ctrl-C stops both). It also checks Kafka is up first. To see a
+rebalance while it runs, in another terminal: `kill "$(cat .c1.pid)"`.
+(You don't need to start the two at the same instant — Kafka rebalances whenever a
+consumer joins or leaves; the script is just convenience.)
+
 Watch: each consumer prints the partitions it was **assigned** (together they cover
 all three, no overlap); re-run the producer and each message is handled by exactly
 one consumer; every event for one `order_id` stays in order on a single consumer;
