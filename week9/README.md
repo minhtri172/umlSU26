@@ -28,7 +28,7 @@ docker exec week9-kafka /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092
 
 # 2. Python env
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 # 3. produce keyed messages (prints the partition each order lands on)
