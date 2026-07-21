@@ -90,6 +90,13 @@ other containers on the Docker network (the pipeline agent). A container's
 `localhost` is itself, not the broker, so it needs the by-name address — same
 broker, two reachable addresses.
 
+Create the `ci.images` topic before the first run (auto-create is off, same as `orders`):
+```bash
+docker exec week9-kafka /opt/kafka/bin/kafka-topics.sh \
+  --create --topic ci.images --partitions 1 --replication-factor 1 \
+  --bootstrap-server localhost:9092
+```
+
 Verify a send landed:
 ```bash
 docker exec week9-kafka /opt/kafka/bin/kafka-console-consumer.sh \
