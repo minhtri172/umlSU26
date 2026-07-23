@@ -22,10 +22,7 @@ pipeline {
     stages {
         stage('Build & push image') {
             agent {
-                docker {
-                    image 'docker:latest' 
-                    args '-v /var/run/docker.sock:/var/run/docker.sock --user root'
-                }
+                label 'docker-agent'
             }
             steps {
                 sh '''
