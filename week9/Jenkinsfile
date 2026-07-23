@@ -21,9 +21,7 @@ pipeline {
     }
     stages {
         stage('Build & push image') {
-            agent {
-                label 'docker-agent'
-            }
+            agent any
             steps {
                 sh '''
                     docker build -t ${REGISTRY}/${IMAGE}:${TAG} week9/app
