@@ -9,7 +9,7 @@
 // The registry (localhost:5001) is plain HTTP with no auth, so the push needs
 // NO certificates and NO `docker login` — Docker treats localhost registries as
 // insecure by default. That's the simpler version of the earlier TLS + htpasswd
-// setup.
+// setup. test
 pipeline {
     agent none
     environment {
