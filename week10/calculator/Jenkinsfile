@@ -13,7 +13,12 @@
 //       docker build -t localhost:5001/kafka-python:1 week9
 //       docker push  localhost:5001/kafka-python:1
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'localhost:5001/kafka-python:1'
+            args '-v /var/run/docker.sock:/var/run/docker.sock --network week9_default -u root'
+        }
+    }
     environment {
         REGISTRY = 'localhost:5001'
         IMAGE    = 'calculator'
@@ -22,8 +27,7 @@ pipeline {
         BROKER   = 'week10-kafka:29092'
     }
     stages {
-        stage('Build & push image') {
-            agent any
+        stage('Build & push image') {          
             steps {
                 sh '''
                     docker build -t ${REGISTRY}/${IMAGE}:${VERSION} week10/calculator
@@ -32,12 +36,6 @@ pipeline {
             }
         }
         stage('Announce to Kafka') {
-            agent {
-                docker {
-                    image 'localhost:5001/kafka-python:1'
-                    args '--network week10_default'
-                }
-            }
             steps {
                 sh 'python week10/calculator/publish_event.py'
             }
