@@ -16,7 +16,7 @@ pipeline {
     agent {
         docker {
             image 'localhost:5001/kafka-python:1'
-            args '-v /var/run/docker.sock:/var/run/docker.sock --network week9_default -u root'
+            args '-v /var/run/docker.sock:/var/run/docker.sock --network week10_default -u root'
         }
     }
     environment {
