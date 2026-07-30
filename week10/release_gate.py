@@ -38,6 +38,7 @@ def deploy(version):
     subprocess.run(["docker", "pull", ref], check=True, capture_output=True)
     subprocess.run(["docker", "run", "-d", "--name", name, "-p", f"{HOST_PORT}:8080", ref],
                    check=True, capture_output=True)
+    print(f"deploy {ref}")
 
 
 def run_tests():
@@ -69,6 +70,7 @@ def promote(version):
 def teardown(version):
     """Stop and remove the candidate container once you are done testing it."""
     subprocess.run(["docker", "rm", "-f", f"candidate-{version}"], capture_output=True)
+    print(f"teardown calculator:{version}")
 
 
 # ===========================================================================
@@ -96,6 +98,8 @@ for msg in consumer:
         deploy(version)
         if run_tests():
             promote(version)
+        else:
+            print(f"Tests fail! Do not promote calculator:{version}")
 
-        # TODO: teardown(version) when you are done with the candidate container.
-        teardown(version)
+    # TODO: teardown(version) when you are done with the candidate container.
+    teardown(version)
