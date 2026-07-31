@@ -91,15 +91,15 @@ for msg in consumer:
     print(f"[event] {event}")
 
     # TODO: read the version from the event.
-    if 'version' in event:
-        version = event['version']
-        # TODO: deploy(version), then run_tests(). If it passes, promote(version).
-        #       If it fails, do nothing.
-        deploy(version)
-        if run_tests():
-            promote(version)
-        else:
-            print(f"Tests fail! Do not promote calculator:{version}")
+    version = event['version']
+
+    # TODO: deploy(version), then run_tests(). If it passes, promote(version).
+    #       If it fails, do nothing.
+    deploy(version)
+    if run_tests():
+        promote(version)
+    else:
+        print(f"Tests fail! Do not promote calculator:{version}")
 
     # TODO: teardown(version) when you are done with the candidate container.
     teardown(version)
