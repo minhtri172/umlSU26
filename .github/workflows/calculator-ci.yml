@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: unit test
-        run: ./gradlew test
+        run: ./gradlew test week10/calculator
 
   build-and-test:
     runs-on: ubuntu-latest
