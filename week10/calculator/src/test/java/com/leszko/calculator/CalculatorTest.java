@@ -10,10 +10,12 @@ public class CalculatorTest {
           assertEquals(2, calculator.sum(1, 1));
      }
 
+     @Test
      public void testZero() {
           assertEquals(1, calculator.sum(3, -3));
      }
 
+     @Test
      public void testNegative() {
           assertEquals(-1, calculator.sum(2, -3));
      }
