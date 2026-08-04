@@ -11,7 +11,7 @@ public class CalculatorTest {
      }
 
      public void testZero() {
-          assertEquals(0, calculator.sum(3, -3));
+          assertEquals(1, calculator.sum(3, -3));
      }
 
      public void testNegative() {

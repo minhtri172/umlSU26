@@ -13,11 +13,12 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
-        
+
       - name: unit test
         run: |
           cd week10/calculator
           ./gradlew test
+          
   build-and-test:
     runs-on: ubuntu-latest
     needs: unit-test
