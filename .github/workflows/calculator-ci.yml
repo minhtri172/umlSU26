@@ -12,19 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: unit test
         run: |
           cd week10/calculator
           ./gradlew test
-          
+
   build-and-test:
     runs-on: ubuntu-latest
     needs: unit-test
     steps:
       - name: Check out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build the calculator image
         run: docker build -t calculator:gha-${{ github.run_number }} week10/calculator
