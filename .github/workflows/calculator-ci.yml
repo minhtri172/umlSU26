@@ -8,8 +8,15 @@ on:
       - ".github/workflows/calculator-ci.yml"
 
 jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: unit test
+        run: ./gradlew test
+
   build-and-test:
     runs-on: ubuntu-latest
+    needs: unit-test
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
