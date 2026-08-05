@@ -12,7 +12,7 @@ public class CalculatorTest {
 
      @Test
      public void testZero() {
-          assertEquals(0, calculator.sum(3, -3));
+          assertEquals(1, calculator.sum(3, -3));
      }
 
      @Test
